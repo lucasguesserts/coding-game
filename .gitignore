@@ -1,0 +1,11 @@
+node_modules/
+dist/
+
+*.py[cod]
+
+*.log
+
+*.swp
+*.swo
+
+.vscode/
