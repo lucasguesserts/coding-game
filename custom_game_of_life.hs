@@ -133,11 +133,13 @@ makeNewCells allCoordinates cells aliveFunction birthFuntion =
 
 -- join all
 
-simulate :: Int -> Int -> [[Cell]] -> ([Cell] -> Cell) -> ([Cell] -> Cell) -> [[Cell]]
-simulate h w cells aliveFunction birthFunction =
-  makeNewCells coordinates cells aliveFunction birthFunction
+simulate :: Int -> Int -> Int -> [[Cell]] -> ([Cell] -> Cell) -> ([Cell] -> Cell) -> [[Cell]]
+simulate simStep h w cells aliveFunction birthFunction
+  | simStep == 0 = cells
+  | otherwise = simulate (simStep-1) h w newCells aliveFunction birthFunction
   where
     coordinates = makeCoordinates h w
+    newCells = makeNewCells coordinates (addAllDeadCells cells) aliveFunction birthFunction
 
 -- MAIN
 
@@ -153,8 +155,7 @@ main = do
 
   let aliveTransformationFunction = toLivenessFunction aliveRawCondition
   let birthTransformationFunction = toLivenessFunction birthRawCondition
-  let cells = (addAllDeadCells . rawInitialConditionToCells) initialRawCondition
-
+  let cells = rawInitialConditionToCells initialRawCondition
 
   print aliveRawCondition
   print birthRawCondition
@@ -162,19 +163,9 @@ main = do
   print $ makeCoordinates h w
   displayCells cells
   print $ getSurroundingCells (2,1) cells
-  displayCells $ simulate h w cells aliveTransformationFunction birthTransformationFunction
-  displayOutput $ simulate h w cells aliveTransformationFunction birthTransformationFunction
+  let n = 2
+  print n
+  displayCells $ simulate n h w cells aliveTransformationFunction birthTransformationFunction
+  displayOutput $ simulate n h w cells aliveTransformationFunction birthTransformationFunction
 
   return ()
-
-
-
-  -- print (h, w, n)
-  -- print aliveRawCondition
-  -- print $ toLivenessList aliveRawCondition
-  -- print $ toLivenessList birthRawCondition
-  -- print birthRawCondition
-  -- displayCells . addAllDeadCells . rawInitialConditionToCells $ initialRawCondition
-  -- displayCells [getSurroundingCells (1, 1) ((addAllDeadCells . rawInitialConditionToCells) initialRawCondition)]
-  -- print $ countAlive (getSurroundingCells (1, 1) ((addAllDeadCells . rawInitialConditionToCells) initialRawCondition))
-  -- print $ toLivenessFunction "000000000" [Alive, Dead, Dead, Dead, Dead]
