@@ -40,7 +40,7 @@ cellsToOutput :: [[Cell]] -> [[Char]]
 cellsToOutput = map cellsToChars
 
 printOutput :: [[Cell]] -> IO ()
-printOutput cells = putStrLn . unlines $ cellsToOutput cells
+printOutput cells = putStr . unlines $ cellsToOutput cells
 
 displayOutput :: [[Cell]] -> IO ()
 displayOutput cells = do
@@ -48,7 +48,6 @@ displayOutput cells = do
   putStrLn "Game status:"
   printOutput cells
   skipLine
-
 
 -- surrounding cells
 
@@ -157,15 +156,6 @@ main = do
   let birthTransformationFunction = toLivenessFunction birthRawCondition
   let cells = rawInitialConditionToCells initialRawCondition
 
-  print aliveRawCondition
-  print birthRawCondition
-  print $ toLivenessList birthRawCondition
-  print $ makeCoordinates h w
-  displayCells cells
-  print $ getSurroundingCells (2,1) cells
-  let n = 2
-  print n
-  displayCells $ simulate n h w cells aliveTransformationFunction birthTransformationFunction
-  displayOutput $ simulate n h w cells aliveTransformationFunction birthTransformationFunction
+  printOutput $ simulate n h w cells aliveTransformationFunction birthTransformationFunction
 
   return ()
