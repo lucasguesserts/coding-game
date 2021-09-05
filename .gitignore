@@ -1,11 +1,28 @@
-node_modules/
-dist/
+# Ignore all
+*
 
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
+# haskell
+*.o
+*.hi
+
+# python
 *.py[cod]
 
+# other files
 *.log
 
+# vim
 *.swp
 *.swo
 
+# visual studio code (vscode)
 .vscode/
+
+# custom scripts
+!run_game_of_life
