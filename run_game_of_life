@@ -1,0 +1,4 @@
+#!/bin/sh
+
+ghc custom_game_of_life
+./custom_game_of_life < custom_game_of_life_input.txt
