@@ -1,0 +1,4 @@
+#!/bin/sh
+
+ghc solution
+./solution < input.txt
