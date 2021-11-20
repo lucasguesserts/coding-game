@@ -15,6 +15,7 @@
 *.py[cod]
 
 # other files
+result.txt
 *.log
 
 # vim
