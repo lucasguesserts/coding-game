@@ -1,0 +1,6 @@
+name: coding-game
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - black=21.11b0
