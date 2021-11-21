@@ -1,0 +1,7 @@
+#!/bin/sh
+
+
+ghc solution \
+&& ./solution < input.txt > result.txt \
+&& diff output.txt result.txt
+if [[ $? -eq 0 ]]; then echo "success"; else echo "failure"; fi
